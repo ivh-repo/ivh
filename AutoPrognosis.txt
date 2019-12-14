@@ -1,0 +1,22 @@
+# What is AutoPrognosis?
+AutoPrognosis is an algorithmic framework for automating the design of machine learning based clinical prognostic models[1]. Helps in choosing which algorithms to use and tune parameters.
+
+
+# Data set used
+UK Biobank dataset (http://www.ukbiobank.ac.uk/register-apply/). 
+Dataset contains data from a prospective cohort study group of 423,604 participants without CVD.
+
+# Components of AutoPrognosis
+	Data set
+	Data imputation algorithm
+	Feature extraction algorithms
+	Classification algorithms
+	Calibration
+	Clinical interpretation
+
+# How it works?
+
+# Comparison of other risk predictor algorithms with AutoPrognosis
+
+# How to run AutoPrognosis
+
