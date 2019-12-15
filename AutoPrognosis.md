@@ -8,17 +8,25 @@ https://github.com/ahmedmalaa/AutoPrognosis
 UK Biobank dataset (http://www.ukbiobank.ac.uk/register-apply/). 
 Dataset contains data from a prospective cohort study group of 423,604 participants without CVD.
 
-# Components of AutoPrognosis. (for schematic refer to 'AutoPrognosis.docx' file)
-	Data set
-	Data imputation algorithm
-	Feature extraction algorithms
-	Classification algorithms
-	Calibration
-	Clinical interpretation
+# Components of AutoPrognosis. 
+(For schematic refer to 'AutoPrognosis.docx' file)
+* Data set
+* Data imputation algorithm
+* Feature extraction algorithms
+* Classification algorithms
+* Calibration
+* Clinical interpretation
 
 # How it works?
 Uses an advanced Bayesian optimization technique for designing a prognostic model made out of a weighted ensemble of machine learning pipelines.
-Each pipelines means different combiination of algorithms for each of the components(for imputation, feature extraction and classification).
+Each pipelines means different combination of algorithms for each of the components(for imputation, feature extraction and classification).
+Design space of autoprognosis contains following: 
+  * 7 imputation algorithms
+  * 9 feature processing algorithms
+  * 20 classification algorithms
+  * 3 calibration methods
+Combining above components AutoPrognosis contains 5460 machine learning pipelines.
+
 
 # Comparison of other risk predictor algorithms with AutoPrognosis
 Out of 4801 CVD cases recorded within 5 years baseline, AutoPrognosis could predict 368 more cases compared to Framingham score.
