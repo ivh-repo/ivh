@@ -25,6 +25,7 @@ Design space of autoprognosis contains following:
   * 9 feature processing algorithms
   * 20 classification algorithms
   * 3 calibration methods
+
 Combining above components AutoPrognosis contains 5460 machine learning pipelines.
 
 
