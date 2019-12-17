@@ -10,6 +10,7 @@ Dataset contains data from a prospective cohort study group of 423,604 participa
 
 # Components of AutoPrognosis. 
 (For schematic refer to 'AutoPrognosis.docx' file)
+![schematic image](https://github.com/jrlvarghese/Ayevh/blob/master/autoprognosis_schematic.PNG)
 * Data set
 * Data imputation algorithm
 * Feature extraction algorithms
@@ -25,7 +26,6 @@ Design space of autoprognosis contains following:
   * 9 feature processing algorithms
   * 20 classification algorithms
   * 3 calibration methods
-
 Combining above components AutoPrognosis contains 5460 machine learning pipelines.
 
 
