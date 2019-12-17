@@ -9,7 +9,6 @@ UK Biobank dataset (http://www.ukbiobank.ac.uk/register-apply/).
 Dataset contains data from a prospective cohort study group of 423,604 participants without CVD.
 
 # Components of AutoPrognosis. 
-(For schematic refer to 'AutoPrognosis.docx' file)
 ![schematic image](https://github.com/jrlvarghese/Ayevh/blob/master/autoprognosis_schematic.PNG)
 * Data set
 * Data imputation algorithm
