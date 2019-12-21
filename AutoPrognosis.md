@@ -9,14 +9,13 @@ UK Biobank dataset (http://www.ukbiobank.ac.uk/register-apply/).
 Dataset contains data from a prospective cohort study group of 423,604 participants without CVD.
 
 # Components of AutoPrognosis<sup>1</sup>. 
-![schematic image](https://github.com/jrlvarghese/Ayevh/blob/master/autoprognosis_schematic.PNG)
-### Image source: Please see reference 1.
 * Data set
 * Data imputation algorithm
 * Feature extraction algorithms
 * Classification algorithms
 * Calibration
 * Clinical interpretation
+For schematic of algorithm refer this [link](https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0213653&type=printable)
 
 # How it works?
 Uses an advanced Bayesian optimization technique for designing a prognostic model made out of a weighted ensemble of machine learning pipelines.
