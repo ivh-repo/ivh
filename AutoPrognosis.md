@@ -15,6 +15,7 @@ Dataset contains data from a prospective cohort study group of 423,604 participa
 * Classification algorithms
 * Calibration
 * Clinical interpretation
+
 For schematic of algorithm refer this [link](https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0213653&type=printable)
 
 # How it works?
@@ -25,6 +26,7 @@ Design space of autoprognosis contains following<sup>1</sup>:
   * 9 feature processing algorithms
   * 20 classification algorithms
   * 3 calibration methods
+
 Combining above components AutoPrognosis contains 5460 machine learning pipelines<sup>1</sup>.
 
 
