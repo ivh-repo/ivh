@@ -12,6 +12,6 @@ export ayesudo='docker exec -w /root -u root -it ayevh'
 export ayeexec='docker exec -w /home/ayevh/work -u ayevh -it ayevh'
 docker pull ayevh/ayevh
 screen -dmS ayevh docker run -v /home/${USER}/ayevh/work:/home/ayevh/work -p 8080:80 -p 8888:8888 --name ayevh -u root -w /home/ayevh -it ayevh/ayevh:latest bash
-printf "Waiting for container \"hindawi\"... "; while [ $(docker ps | grep hindawi | wc -l) -lt 1 ]; do printf .; sleep 1; done; echo Container "hindawi" started
+printf "Waiting for \"AyeVH\" services to initialize... "; while [ $(docker ps | grep ayevh | wc -l) -lt 1 ]; do printf .; sleep 1; done; echo Container "ayevh" started
 $ayesudo service mysql restart
 $ayesudo service apache2 restart
