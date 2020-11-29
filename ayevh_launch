@@ -8,6 +8,13 @@ sudo groupadd docker
 sudo gpasswd -a $USER docker
 sudo usermod -aG docker ${USER}
 sudo service docker restart
+
+if [ "$1" == "reset " ]
+then
+  docker stop ayevh
+  docker rm ayevh
+  #killall screen
+fi
 export ayesudo='docker exec -w /root -u root -it ayevh'
 export ayeexec='docker exec -w /home/ayevh/work -u ayevh -it ayevh'
 docker pull ayevh/ayevh
