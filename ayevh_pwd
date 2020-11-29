@@ -1,0 +1,27 @@
+#Copyright 2020 Abhishek Choudhary
+#Dstributed under AyeAI Singularity Public License - latest version
+# NO Warranty NO Liabilities
+# For ACADEMIC PURPOSES only - NOT to be used in life threatening or any other critical scenarios
+
+##TODO: Enable options once this is moved to AyeVDI sourcefrom
+#if [ "$ayevh" == "reset " ]
+#then
+#  docker stop ayevh
+#  docker rm ayevh
+#  #killall screen
+#fi
+
+export ayesudo='docker exec -w /root -u root -it ayevh'
+export ayeexec='docker exec -w /home/ayevh/work -u ayevh -it ayevh'
+docker pull ayevh/ayevh
+docker run -v /home/${USER}/ayevh/work:/home/ayevh/work -p 8080:80 -p 8888:8888 --name ayevh -u root -w /home/ayevh -it ayevh/ayevh:latest bash
+printf "Waiting for \"AyeVH\" services to initialize... "; while [ $(docker ps | grep ayevh | wc -l) -lt 1 ]; do printf .; sleep 1; done; echo Container "ayevh" started
+#TODO: Optimize the service start busy loops
+echo Starting DB server
+docker exec -w /root -u root ayevh bash -c 'ayedb=255; while [ $ayedb -gt 0 ]; do service mysql start; ayedb=$?; sleep 1; done'
+echo Starting web server
+docker exec -w /root -u root ayevh bash -c 'ayeweb=255; while [ $ayeweb -gt 0 ]; do service apache2 start; ayeweb=$?; sleep 1; done'
+echo AyeVH is up and running at http://localhost:8080
+echo OpenEMR on AyeVH - local run - http://localhost:8080/openemr/
+echo Unmodified OpenEMR on AyeVH - for debug with the same DB - http://localhost:8080/openemr-orig/
+echo Click on port 8080 above to access AyeVH
