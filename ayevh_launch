@@ -24,13 +24,9 @@ screen -dmS ayevh docker run -v /home/${USER}/ayevh/work:/home/ayevh/work -p 808
 printf "Waiting for \"AyeVH\" services to initialize... "; while [ $(docker ps | grep ayevh | wc -l) -lt 1 ]; do printf .; sleep 1; done; echo Container "ayevh" started
 #TODO: Optimize the service start busy loops
 echo Starting DB server
-#docker exec -w /root -u root ayevh bash -c "while [ $(service mysql status | grep -i 'uptime\|running' | wc -l) -lt 1 ]; do service mysql start; sleep 1; done"
-ayedb=255
-docker exec -w /root -u root ayevh bash -c "while [ $ayedb -gt 0 ]; do service mysql start; ayedb=$?; sleep 1; done"
+docker exec -w /root -u root ayevh bash -c 'ayedb=255; while [ $ayedb -gt 0 ]; do service apache2 start; ayedb=$?; sleep 1; done'
 echo Starting web server
-#docker exec -w /root -u root ayevh bash -c "while [ $(service apache2 status | grep running | wc -l) -lt 1 ]; do service apache2 start; sleep 1; done"
-ayeweb=255
-docker exec -w /root -u root ayevh bash -c "while [ $ayeweb -gt 0 ]; do service apache2 start; ayeweb=$?; sleep 1; done"
+docker exec -w /root -u root ayevh bash -c 'ayeweb=255; while [ $ayeweb -gt 0 ]; do service apache2 start; ayeweb=$?; sleep 1; done'
 echo AyeVH is up and running at http://localhost:8080
 echo OpenEMR on AyeVH - local run - http://localhost:8080/openemr/
 echo Unmodified OpenEMR on AyeVH - for debug with the same DB - http://localhost:8080/openemr-orig/
