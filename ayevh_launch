@@ -1,0 +1,16 @@
+#Copyright 2020 Abhishek Choudhary
+#Dstributed under AyeAI Singularity Public License - latest version
+# NO Warranty NO Liabilities
+# For ACADEMIC PURPOSES only - NOT to be used in life threatening or any other critical scenarios
+
+sudo apt install -y screen docker.io
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+sudo usermod +aG docker ${USER}
+sudo service docker restart
+export ayesudo='docker exec -w /root -u root -it ayevh'
+export ayeexec='docker exec -w /home/ayevh/work -u ayevh -it ayevh'
+docker pull ayevh/ayevh
+screen -dmS ayevh docker run -v /home/${USER}/ayevh/work:/home/ayevh/work -p 8080:80 -p 8888:8888 --name ayevh -u root -w /home/ayevh -it ayevh/ayevh:latest bash
+$ayesudo service mysql restart
+$ayesudo service apache2 restart
