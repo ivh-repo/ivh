@@ -9,7 +9,7 @@ sudo gpasswd -a $USER docker
 sudo usermod -aG docker ${USER}
 sudo service docker restart
 
-#Enable options once this is moved to AyeVDI sourcefrom
+##TODO: Enable options once this is moved to AyeVDI sourcefrom
 #if [ "$ayevh" == "reset " ]
 #then
 #  docker stop ayevh
