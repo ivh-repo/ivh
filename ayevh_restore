@@ -61,5 +61,5 @@ else
   docker rm ayevh
   screen -dmS ayevh_restore docker run -v /home/${USER}/ayevh/work:/home/ayevh/work -p 8080:80 -p 9090:3306 --name ayevh -u root -w /home/ayevh -it ayevh/${USER}:${2} bash
   printf "Waiting for \"AyeVH\" services to be restored from ${2}... "; while [ $(docker ps | grep ayevh | wc -l) -lt 1 ]; do printf .; sleep 1; done
-  sourcefrom https://bit.ly/docker_launch
+  sourcefrom https://bit.ly/ayevh_launch
 fi
