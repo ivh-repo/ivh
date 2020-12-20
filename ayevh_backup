@@ -49,9 +49,9 @@ export ayeexec='docker exec -w /home/ayevh/work -u ayevh -it ayevh'
 
 if [ "$2" == "" ]
 then
-  export tag=${2}
-else
   export tag=$(date +%s)
+else
+  export tag=${2}
 fi
 
 #TODO: Allow forced update
