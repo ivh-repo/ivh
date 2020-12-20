@@ -27,7 +27,7 @@ fi
 #TODO: Add encryption option to escrow files
 #TODO: Add version magic to escrow files
 
-sourcefrom https://bit.ly/ayevh_bkp
+sourcefrom https://bit.ly/ayevh_stop
 
 mkdir -p ${HOME}/ayevh/work/escrow
 if [ "$2" == "" ]
