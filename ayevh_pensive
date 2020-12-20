@@ -48,11 +48,16 @@ fi
 if [ -x ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz ]
 then
   #TODO: Add standard error checks for non existent containers etc
+  docker stop ayevh
+  docker rm ayevh
   sourcefrom https://bit.ly/ayevh_launch
 
   $ayesudo service mysql stop
   $ayesudo service apache2 stop
   $ayesudo bash -c 'cd / && tar -xvzf /home/ayevh/work/escrow/ayevh_pensive.tgz'
+  $ayesudo chown -R mysql:mysql /var/lib/mysql/
+  $ayesudo chown -R www-data:www-data /var/www/html/
+  $ayesudo chmod 666 /var/www/html/openemr/sites/default/sqlconf.php
 fi
 
 sourcefrom https://bit.ly/ayevh_launch
