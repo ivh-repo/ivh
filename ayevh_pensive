@@ -35,14 +35,14 @@ then
   echo Recalling AyeVH escrow from ${HOME}/ayevh/work/escrow/ayevh_escrow_latest.tgz
   if [ -x ${HOME}/ayevh/work/escrow/ayevh_escrow_latest.tgz ]
   then
-    mv ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz ${HOME}/ayevh/work/escrow/ayevh_pensive_$(date +%s).tgz
-    cp ${HOME}/ayevh/work/escrow/ayevh_escrow_latest.tgz ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz
+    sudo mv ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz ${HOME}/ayevh/work/escrow/ayevh_pensive_$(date +%s).tgz
+    sudo cp ${HOME}/ayevh/work/escrow/ayevh_escrow_latest.tgz ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz
   else
     echo No default AyeVH escrow found. Please specify the AyeVH escrow to recall.
   fi
 else
   echo Recalling AyeVH escrow from $2
-  cp $2 ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz
+  sudo cp $2 ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz
 fi
 
 if [ -x ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz ]
