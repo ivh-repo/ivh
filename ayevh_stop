@@ -24,6 +24,6 @@ fi
 #NO Warranty NO Liabilities
 #For ACADEMIC PURPOSES only - NOT to be used in life threatening or any other critical scenarios
 
-sourcefrom https://bit.ly/ayevh_backup
+sourcefrom https://bit.ly/ayevh_bkp
 
 docker stop ayevh
