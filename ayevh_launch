@@ -3,32 +3,55 @@
 # NO Warranty NO Liabilities
 # For ACADEMIC PURPOSES only - NOT to be used in life threatening or any other critical scenarios
 
+#TODO: Make this a one shot
 sudo apt install -y screen docker.io
 sudo groupadd docker
-sudo gpasswd -a $USER docker
+sudo gpasswd -a ${USER} docker
 sudo usermod -aG docker ${USER}
 sudo service docker restart
 
-##TODO: Enable options once this is moved to AyeVDI sourcefrom
-#if [ "$ayevh" == "reset " ]
-#then
-#  docker stop ayevh
-#  docker rm ayevh
-#  #killall screen
-#fi
-
+mkdir -p /home/${USER}/ayevh/work
 export ayesudo='docker exec -w /root -u root -it ayevh'
 export ayeexec='docker exec -w /home/ayevh/work -u ayevh -it ayevh'
-docker pull ayevh/ayevh
-screen -dmS ayevh docker run -v /home/${USER}/ayevh/work:/home/ayevh/work -p 8080:80 -p 8888:8888 --name ayevh -u root -w /home/ayevh -it ayevh/ayevh:latest bash
-printf "Waiting for \"AyeVH\" services to initialize... "; while [ $(docker ps | grep ayevh | wc -l) -lt 1 ]; do printf .; sleep 1; done; echo Container "ayevh" started
-#TODO: Optimize the service start busy loops
+
+#TODO: Allow forced update
+if [ $(docker ps | grep ayevh | wc -l) -lt 1 ]
+then
+
+  docker pull ayevh/ayevh:latest
+
+  #TODO: Optimize the service start busy loops
+  screen -dmS ayevh_init docker run -v /home/${USER}/ayevh/work:/home/ayevh/work -p 8080:80 -p 9090:3306 --name ayevh -u root -w /home/ayevh -it ayevh/ayevh:latest bash
+  printf "Waiting for \"AyeVH\" services to setup / update... "; while [ $(docker ps | grep ayevh | wc -l) -lt 1 ]; do printf .; sleep 1; done
+  echo "AyeVH" services setup / updated
+
+fi
+
+docker stop ayevh
+docker start ayevh
+screen -dmS ayevh docker exec -it ayevh bash
+printf "Waiting for \"AyeVH\" services to operationalize... "; while [ $(docker ps | grep ayevh | wc -l) -lt 1 ]; do printf .; sleep 1; done
+echo Container "ayevh" started
+
 echo Starting DB server
-docker exec -w /root -u root ayevh bash -c 'ayedb=255; while [ $ayedb -gt 0 ]; do service mysql start; ayedb=$?; sleep 1; done'
+$ayesudo service mysql stop
+$ayesudo bash -c 'ps -e | grep mysql | awk "{print $1}" | xargs kill -9 2>/dev/null'
+$ayesudo bash -c 'ayedb=255; while [ $ayedb -gt 0 ]; do service mysql restart; ayedb=$?; sleep 1; done'
+
 echo Starting web server
-docker exec -w /root -u root ayevh bash -c 'ayeweb=255; while [ $ayeweb -gt 0 ]; do service apache2 start; ayeweb=$?; sleep 1; done'
-echo AyeVH is up and running at http://localhost:8080
-echo OpenEMR on AyeVH - local run - http://localhost:8080/openemr/
-echo Unmodified OpenEMR on AyeVH - for debug with the same DB - http://localhost:8080/openemr-orig/
-xdg-open http://localhost:8080/openemr/
+$ayesudo service apache2 stop
+$ayesudo bash -c 'ps -e | grep apache2 | awk "{print $1}" | xargs kill -9 2>/dev/null'
+$ayesudo bash -c 'kill -9 $(apachectl start | grep pid | cut -d" " -f3 | cut -d")" -f1)'
+$ayesudo bash -c 'ayeweb=255; while [ $ayeweb -gt 0 ]; do service apache2 restart; ayeweb=$?; sleep 1; done'
+
+function summary() {
+  echo AyeVDI is up and running at http://${1}:8080
+  echo OpenEMR on AyeVH - local run - http://${1}:8080/openemr/
+  echo phpMyAdmin on AyeVH - local run - http://${1}:8080/phpmyadmin/
+  
+  xdg-open http://${1}:8080/openemr/
+}
+
+summary `ifconfig $(route | grep default | awk '{print $NF}') | grep inet\  | awk '{print $2}'`
+
 
