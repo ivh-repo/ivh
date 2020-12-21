@@ -45,7 +45,7 @@ else
   sudo cp $2 ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz
 fi
 
-if [ -x ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz ]
+if [ -f ${HOME}/ayevh/work/escrow/ayevh_pensive.tgz ]
 then
   #TODO: Add standard error checks for non existent containers etc
   docker stop ayevh
