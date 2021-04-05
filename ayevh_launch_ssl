@@ -56,6 +56,11 @@ then
   docker stop ayevh
   docker rm ayevh
 
+  echo Please stop the service running on port 80, if any.
+  #TODO: automate this step
+  echo Press any key to contiune, ^C to abort further actions.
+  read dummy_user_input
+
   #TODO: Optimize the service start busy loops
   screen -dmS ayevh_init docker run -v /home/${USER}/ayevh/work:/home/ayevh/work -p 80:80 -p 8080:443 -p 9090:3306 --name ayevh -u root -w /home/ayevh -it ayevh/ayevh:latest bash
   printf "Waiting for \"AyeVH\" services to setup / update... "; while [ $(docker ps | grep ayevh | wc -l) -lt 1 ]; do printf .; sleep 1; done
@@ -96,6 +101,15 @@ function summary() {
 #  xdg-open https://${1}:8080/openemr/
 }
 
-summary `ifconfig $(route | grep default | awk '{print $NF}') | grep inet\  | awk '{print $2}'`
+# summary `ifconfig $(route | grep default | awk '{print $NF}') | grep inet\  | awk '{print $2}'`
 
+# TODO: Warn user that the image will be overwritten
+docker image rm local/ayevh_cert
+docker commit ayevh local/ayevh_cert
+docker stop ayevh
+docker rm ayevh
+
+echo You may start the regular services on port 80 now.
+echo Press any key to contiune, ^C to abort further actions.
+read dummy_user_input
 
