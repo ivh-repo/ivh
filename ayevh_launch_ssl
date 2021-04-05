@@ -57,7 +57,7 @@ then
   docker rm ayevh
 
   #TODO: Optimize the service start busy loops
-  screen -dmS ayevh_init docker run -v /home/${USER}/ayevh/work:/home/ayevh/work -p 8080:443 -p 9090:3306 --name ayevh -u root -w /home/ayevh -it ayevh/ayevh:latest bash
+  screen -dmS ayevh_init docker run -v /home/${USER}/ayevh/work:/home/ayevh/work -p 80:80 -p 8080:443 -p 9090:3306 --name ayevh -u root -w /home/ayevh -it ayevh/ayevh:latest bash
   printf "Waiting for \"AyeVH\" services to setup / update... "; while [ $(docker ps | grep ayevh | wc -l) -lt 1 ]; do printf .; sleep 1; done
   echo "AyeVH" services setup / updated
 
